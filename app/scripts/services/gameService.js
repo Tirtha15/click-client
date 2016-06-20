@@ -1,32 +1,6 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name clickClientApp.controller:MainCtrl
- * @description
- * # MainCtrl
- * Controller of the clickClientApp
- */
 angular.module('clickClientApp')
-  .controller('MainCtrl', function (gameService) {
-    var vm = this;
-    vm.step = 1;
-    // vm.games = [{
-    // 	rows: 5,
-    // 	columns: 6,
-    // 	maxPlayers: 4,
-    // 	minPlayers: 2,
-    // 	blockTime: 1,
-    // 	players: 3,
-    // 	startTime: '9 mins'
-    // }];
-
-    gameService.fetchGames().then(function(games){
-    	vm.games = games;
-    });
-  });
-
-  angular.module('clickClientApp')
   .service('gameService', function($resource, $q) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var service = this;
@@ -43,35 +17,10 @@ angular.module('clickClientApp')
     //     isArray: true
     //   }
     // });
-    var gameList = $resource('http://localhost:1337/games',{},{
-    	fetch: {
-    		method: 'GET',
-    		isArray: true
-    	}
-    });
-
-    var gameLobby = $resource('http://localhost:1337/game/:id',{
-    	id: '@id'
-    },{
-    	fetch: {
-    		method: 'GET'
-    	}
-    })
+    var gameList = $resource('http://localhost:1337/games');
     service.fetchGames = function(){
       return $q(function(resolve, reject){
-        gameList.fetch(function(response){
-          if(response.message){
-            reject(null);
-          } else {
-            resolve(response);
-          }
-        })
-      });
-    };
-
-    service.fetchGameLobby = function(gameId){
-      return $q(function(resolve, reject){
-        gameLobby.fetch({id: gameId}, function(response){
+        gameList.get(function(response){
           if(response.message){
             reject(null);
           } else {

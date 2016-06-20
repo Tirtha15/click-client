@@ -1,4 +1,4 @@
-<div class="jumbotron">
+<!-- <div class="jumbotron">
   <h1>'Allo, 'Allo!</h1>
   <p class="lead">
     <img src="images/yeoman.png" alt="I'm Yeoman"><br>
@@ -21,3 +21,127 @@
   <h4>Karma</h4>
   <p>Spectacular Test Runner for JavaScript.</p>
 </div>
+ -->
+ <div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Start Game</h4>
+      </div>
+      <div ng-if="vm.step == 2">
+        <div class="modal-body">
+        <div class= "row">
+         <div class="col-md-6">
+           <div class="form-group">
+              <label for="sel1">Rows:</label>
+              <select class="form-control" id="row">
+                <option>5</option>
+                <option>10</option>
+                <option>15</option>
+                <option>20</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+           <div class="form-group">
+              <label for="sel1">Columns:</label>
+              <select class="form-control" id="column">
+                <option>5</option>
+                <option>10</option>
+                <option>15</option>
+                <option>20</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class= "row">
+         <div class="col-md-4">
+           <div class="form-group">
+              <label for="sel1">Maimum Players:</label>
+              <select class="form-control" id="maxPlayers">
+                <option>2</option>
+                <option>5</option>
+                <option>10</option>
+                <option>15</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+           <div class="form-group">
+              <label for="sel1">Minimum Players:</label>
+              <select class="form-control" id="minPlayers">
+                <option>2</option>
+                <option>5</option>
+                <option>10</option>
+                <option>15</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+           <div class="form-group">
+              <label for="sel1">Block Time</label>
+              <select class="form-control" id="blockTime">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        </div>      
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" ng-click="vm.createGame(vm.userId)" data-dismiss="modal">Start</button>
+        </div>
+      </div>
+      <div ng-if="vm.step == 1">
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-9">
+              <div class="form-group">
+                <label for="user">Username:</label>
+                <input type="text" class="form-control" id="User">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" ng-click="vm.createUser()">Next</button>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>
+ <div class="row">
+  <div class="col-md-12">
+   <div class="table-responsive">          
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Started</th>
+        <th>Board Size</th>
+        <th>Max Players</th>
+        <th>Min Players</th>
+        <th># of Players</th>
+        <th>Block Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="game in vm.games">
+        <td><div ng-if="game.startTime">{{game.startTime}} ago</div>Not yet started</td>
+        <td>{{game.rows}} X {{game.columns}}</td>
+        <td>{{game.maxPlayers}}</td>
+        <td>{{game.minPlayers}}</td>
+        <td>{{game.players.length}}</td>
+        <td>{{game.blockTime}} seconds</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <button type="button" class="btn btn-primary active" data-toggle="modal" data-target="#myModal">Start New Game</button>
+ </div>
