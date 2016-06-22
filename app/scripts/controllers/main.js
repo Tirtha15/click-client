@@ -8,7 +8,7 @@
  * Controller of the clickClientApp
  */
 angular.module('clickClientApp')
-  .controller('MainCtrl', function (gameService, userService) {
+  .controller('MainCtrl', function ($window, gameService, userService) {
     var vm = this;
     vm.step = 1;
 
@@ -26,9 +26,32 @@ angular.module('clickClientApp')
           if(game){
             gameService.fetchGames().then(function(games){
                 vm.games = games;
+                var url = '/#/lobby/'+ game.game.id;
+                $window.open(url);
             });
           }
         });
+    };
+
+    vm.register = function(userName, gameId){
+      userService.createUser(userName).then(function(user){
+       if(user){
+        vm.userId = user.user.id;
+         gameService.register(gameId, user.user.id).then(function(){
+            //open game lobby
+         });
+       }
+     });
+    };
+
+    vm.selectGame = function(gameId){
+      vm.selectedGame = gameId;
+      console.log(vm.userId);
+      if(vm.userId){
+        gameService.register(gameId, vm.userId).then(function(){
+            //open game lobby
+        });
+      }
     };
 
     gameService.fetchGames().then(function(games){
@@ -55,6 +78,15 @@ angular.module('clickClientApp')
         }
     });
 
+    var register =$resource('http://localhost:1337/user/:id/game/:gid/register',{
+        id: '@id',
+        gid: '@gid'
+    },{
+        create: {
+            method: 'POST'
+        }
+    });
+
     var gameLobby = $resource('http://localhost:1337/game/:id',{
     	id: '@id'
     },{
@@ -62,6 +94,19 @@ angular.module('clickClientApp')
     		method: 'GET'
     	}
     });
+
+    service.register = function(gameId, userId){
+        console.log(userId);
+      return $q(function(resolve, reject){
+        register.create({id: userId, gid: gameId}, function(response){
+          if(response.message){
+            reject(null);
+          } else {
+            resolve(response);
+          }
+        })
+      });  
+    };
 
     service.createGame = function(gameParams, userId){
       return $q(function(resolve, reject){
