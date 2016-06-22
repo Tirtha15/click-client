@@ -37,22 +37,22 @@
          <div class="col-md-6">
            <div class="form-group">
               <label for="sel1">Rows:</label>
-              <select class="form-control" id="row">
-                <option>5</option>
-                <option>10</option>
-                <option>15</option>
-                <option>20</option>
+              <select ng-model="game.rows" class="form-control" id="row">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
               </select>
             </div>
           </div>
           <div class="col-md-6">
            <div class="form-group">
               <label for="sel1">Columns:</label>
-              <select class="form-control" id="column">
-                <option>5</option>
-                <option>10</option>
-                <option>15</option>
-                <option>20</option>
+              <select ng-model="game.columns" class="form-control" id="column">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
               </select>
             </div>
           </div>
@@ -60,42 +60,42 @@
         <div class= "row">
          <div class="col-md-4">
            <div class="form-group">
-              <label for="sel1">Maimum Players:</label>
-              <select class="form-control" id="maxPlayers">
-                <option>2</option>
-                <option>5</option>
-                <option>10</option>
-                <option>15</option>
+              <label for="sel1">Maximum Players:</label>
+              <select ng-model="game.maxPlayers" class="form-control" id="maxPlayers">
+                <option value="2">2</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
               </select>
             </div>
           </div>
           <div class="col-md-4">
            <div class="form-group">
               <label for="sel1">Minimum Players:</label>
-              <select class="form-control" id="minPlayers">
-                <option>2</option>
-                <option>5</option>
-                <option>10</option>
-                <option>15</option>
+              <select ng-model="game.minPlayers" class="form-control" id="minPlayers">
+                <option value="2">2</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
               </select>
             </div>
           </div>
           <div class="col-md-4">
            <div class="form-group">
               <label for="sel1">Block Time</label>
-              <select class="form-control" id="blockTime">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+              <select ng-model="game.blockTime" class="form-control" id="blockTime">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
               </select>
             </div>
           </div>
         </div>
         </div>      
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" ng-click="vm.createGame(vm.userId)" data-dismiss="modal">Start</button>
+          <button type="button" class="btn btn-default" ng-click="vm.createGame(game)" data-dismiss="modal">Start</button>
         </div>
       </div>
       <div ng-if="vm.step == 1">
@@ -104,13 +104,13 @@
             <div class="col-md-9">
               <div class="form-group">
                 <label for="user">Username:</label>
-                <input type="text" class="form-control" id="User">
+                <input type="text" class="form-control" id="User" ng-model="userName">
               </div>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" ng-click="vm.createUser()">Next</button>
+          <button type="button" class="btn btn-default" ng-click="vm.createUser(userName)">Next</button>
         </div>
       </div>
     </div>
