@@ -8,10 +8,12 @@
  * Controller of the clickClientApp
  */
 angular.module('clickClientApp')
-  .controller('MainCtrl', function ($window, gameService, userService) {
+  .controller('MainCtrl', function ($window, gameService, moment, userService) {
     var vm = this;
     vm.step = 1;
-    vm.user = userService.user;
+    vm.user = userService.user;    
+    vm.moment = moment;
+    
     vm.createUser = function(userName){
      userService.createUser(userName).then(function(user){
        if(user){

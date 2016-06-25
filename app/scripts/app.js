@@ -17,7 +17,8 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'angularMoment'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -40,3 +41,6 @@ angular
   .module('clickClientApp').constant('_',
     window._
 );
+
+  angular
+  .module('clickClientApp').constant('moment', require('moment-timezone'));

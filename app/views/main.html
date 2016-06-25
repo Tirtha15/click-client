@@ -161,7 +161,7 @@
     </thead>
     <tbody>
       <tr ng-click="vm.selectGame(game.id)" ng-repeat="game in vm.games" data-toggle="modal" data-target="#myModal2">
-        <td><div ng-if="game.startTime">{{game.startTime}} ago</div><div ng-hide="">Not yet started</div></td>
+        <td><div ng-if="game.startTime">{{vm.moment(game.startTime).fromNow()}}</div><div ng-hide="game.startTime">Not yet started</div></td>
         <td>{{game.rows}} X {{game.columns}}</td>
         <td>{{game.maxPlayers}}</td>
         <td>{{game.minPlayers}}</td>
