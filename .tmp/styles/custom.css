@@ -1,0 +1,10 @@
+.cell {
+    display: inline-block;
+    width: 2.1em;
+    height: 2.1em;
+    border: 1px solid #937e62;
+    background-color: white;
+    margin: 5px;
+    color: white;
+}
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImN1c3RvbS5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxzQkFBc0I7SUFDdEIsYUFBYTtJQUNiLGNBQWM7SUFDZCwwQkFBMEI7SUFDMUIsd0JBQXdCO0lBQ3hCLFlBQVk7SUFDWixhQUFhO0NBQ2hCIiwiZmlsZSI6ImN1c3RvbS5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY2VsbCB7XG4gICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICAgIHdpZHRoOiAyLjFlbTtcbiAgICBoZWlnaHQ6IDIuMWVtO1xuICAgIGJvcmRlcjogMXB4IHNvbGlkICM5MzdlNjI7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gICAgbWFyZ2luOiA1cHg7XG4gICAgY29sb3I6IHdoaXRlO1xufSJdfQ== */

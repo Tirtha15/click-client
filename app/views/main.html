@@ -138,7 +138,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" ng-click="vm.register(userName, vm.selectedGame)">Next</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.register(userName, vm.selectedGame)">Next</button>
         </div>      
     </div>    
   </div>
@@ -161,7 +161,7 @@
     </thead>
     <tbody>
       <tr ng-click="vm.selectGame(game.id)" ng-repeat="game in vm.games" data-toggle="modal" data-target="#myModal2">
-        <td><div ng-if="game.startTime">{{game.startTime}} ago</div>Not yet started</td>
+        <td><div ng-if="game.startTime">{{game.startTime}} ago</div><div ng-hide="">Not yet started</div></td>
         <td>{{game.rows}} X {{game.columns}}</td>
         <td>{{game.maxPlayers}}</td>
         <td>{{game.minPlayers}}</td>

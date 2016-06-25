@@ -1,1 +1,32 @@
-<p>This is the lobby view.</p>
+<div class="container">
+	<div class="row">
+	  <div class="col-md-2">
+		  <h4>Registered Players:</h4>
+		  <div ng-repeat="player in vm.game.game.players">
+		   {{player.name}}
+		   <div class="btn btn-default" style="background-color: {{player.color.color}}"></div>
+		   {{player.score.length}}
+		  </div>
+	  </div>
+	  <div class="col-md-10">
+		  <h4>Game Details</h4>
+		  <div>
+		    Board Size: {{vm.game.game.rows}} X {{vm.game.game.columns}}
+		  </div>
+		  <div>
+		    Maximum Players: {{vm.game.game.maxPlayers}}
+		  </div>
+		  <div>
+		    Minimum Players: {{vm.game.game.minPlayers}}
+		  </div>
+		  <div>
+		    Registered Players: {{vm.game.game.players.length}}
+		  </div><br><hr>
+		  <div class="board" >
+		  <div ng-repeat="row in vm.range(vm.game.game.rows+1)">
+		    <span class="cell" ng-style="vm.game.state[vm.cellId(row, col)]? {'background-color': vm.game.state[vm.cellId(row, col)] } : hover?{'background-color': vm.user[0].color.color}: {'background-color': 'white'}" ng-repeat= "col in vm.range(vm.game.game.columns+1)" ng-click="vm.click(row, col)" ng-mouseEnter="hover = true", ng-mouseLeave="hover = false"></span>
+		  </div>
+	  </div>
+	  </div>
+	</div>
+</div>

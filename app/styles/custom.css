@@ -1,0 +1,9 @@
+.cell {
+    display: inline-block;
+    width: 2.1em;
+    height: 2.1em;
+    border: 1px solid #937e62;
+    background-color: white;
+    margin: 5px;
+    color: white;
+}

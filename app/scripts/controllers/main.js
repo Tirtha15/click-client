@@ -11,12 +11,13 @@ angular.module('clickClientApp')
   .controller('MainCtrl', function ($window, gameService, userService) {
     var vm = this;
     vm.step = 1;
-
+    vm.user = userService.user;
     vm.createUser = function(userName){
      userService.createUser(userName).then(function(user){
        if(user){
          vm.step = 2;
          vm.userId = user.user.id;
+         vm.user = user.user;
        }
      });
     };
@@ -26,7 +27,7 @@ angular.module('clickClientApp')
           if(game){
             gameService.fetchGames().then(function(games){
                 vm.games = games;
-                var url = '/#/lobby/'+ game.game.id;
+                var url = '/#/lobby/user/'+ vm.userId +'/game/'+ game.game.id;
                 $window.open(url);
             });
           }
@@ -38,7 +39,8 @@ angular.module('clickClientApp')
        if(user){
         vm.userId = user.user.id;
          gameService.register(gameId, user.user.id).then(function(){
-            //open game lobby
+            var url = '/#/lobby/user/'+ user.user.id +'/game/'+ gameId;
+            $window.open(url);
          });
        }
      });
@@ -60,7 +62,7 @@ angular.module('clickClientApp')
   });
 
   angular.module('clickClientApp')
-  .service('gameService', function($resource, $q) {
+  .service('gameService', function($resource, $q, userService) {
 
     var service = this;
     var gameList = $resource('http://localhost:1337/games',{},{
@@ -76,6 +78,15 @@ angular.module('clickClientApp')
         create: {
             method: 'POST'
         }
+    });
+
+    var score = $resource('http://localhost:1337/user/:id/game/:gid/click',{
+      id: '@id',
+      gid: '@gid'
+    },{
+      create:{
+        method: 'POST'
+      }
     });
 
     var register =$resource('http://localhost:1337/user/:id/game/:gid/register',{
@@ -95,8 +106,22 @@ angular.module('clickClientApp')
     	}
     });
 
+    service.score = function(gameId, userId, squareId){
+      console.log(userService.user);
+      return $q(function(resolve, reject){
+        score.create({id: userId, gid: gameId}, {
+          sqId: squareId
+        }, function(response){
+          if(response.message){
+            reject(null);
+          } else {
+            resolve(response);
+          }
+        })
+      });  
+    };
+
     service.register = function(gameId, userId){
-        console.log(userId);
       return $q(function(resolve, reject){
         register.create({id: userId, gid: gameId}, function(response){
           if(response.message){
@@ -154,7 +179,8 @@ angular.module('clickClientApp')
             method: 'POST'
         }
     });
-
+   // service.user = {};
+    service.user = {};
     service.createUser = function(userName){
       return $q(function(resolve, reject){
         user.create({name: userName}, function(response){
